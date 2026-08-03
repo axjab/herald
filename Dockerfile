@@ -1,11 +1,11 @@
 
+FROM docker:27-cli AS docker-cli
 FROM python:3.12-slim
 
 # Docker CLI (for docker exec/restart) + git (for pulling /scripts repo)
+COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        docker.io \
         git \
-        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir --break-system-packages \
