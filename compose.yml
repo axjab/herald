@@ -1,0 +1,25 @@
+
+services:
+  herald:
+    container_name: herald
+    image: ghcr.io/axjab/herald:0
+    restart: unless-stopped
+    network_mode: host
+    environment:
+        NATS_URL: "nats://${NATS_HOST}:4222"
+        # NOTIFICATION_URL: "${NTFY_URL}/${NTFY_TOPIC}?auth=${NTFY_TOKEN_64}"
+        REPOSITORY_URL: "${REPOSITORY_URL}"
+        REPOSITORY_TOKEN: "${REPOSITORY_TOKEN}"
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /log/herald:/logs
+        - /exe:/opt/bin:ro   # make sure /opt/bin is on PATH
+        - ./scripts:/scripts   # pulled from the scripts repository
+        - /etc/gitconfig:/etc/gitconfig:ro
+ 
+# volumes:
+  # scripts:
+
+# networks:
+#     proxy:
+#         external: true

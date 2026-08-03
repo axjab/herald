@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REGISTRY="ghcr.io/axjab"
+
+sudo docker build \
+  --build-arg VERSION="$VERSION" \
+  -t "$REGISTRY/${NAME}:${VERSION}" \
+  -t "$REGISTRY/${NAME}:latest" \
+  .
+
+echo
+echo -e "\033[1;33m==================================================\033[0m"
+echo -e "\033[1;33m BUILD COMPLETE - REMEMBER TO PUSH TO GHCR\033[0m"
+echo -e "\033[1;33m==================================================\033[0m"

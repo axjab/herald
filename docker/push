@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REGISTRY="ghcr.io/axjab"
+IMAGE="$REGISTRY/$NAME"
+
+echo -e "\033[1;34mPushing $REGISTRY${IMAGE}:${VERSION}\033[0m"
+
+sudo docker push "${IMAGE}:${VERSION}"
+
+echo -e "\033[1;34mPushing ${IMAGE}:latest\033[0m"
+
+sudo docker push "${IMAGE}:latest"
+
+echo
+echo -e "\033[1;32m==================================================\033[0m"
+echo -e "\033[1;32m PUSH COMPLETE - GHCR UPDATED\033[0m"
+echo -e "\033[1;32m==================================================\033[0m"
